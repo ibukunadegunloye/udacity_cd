@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: 2022-07-07
+AWSTemplateFormatVersion: 2010-09-09
 Description: ND9991 C3 L4 
 Resources:
   EC2Instance:
