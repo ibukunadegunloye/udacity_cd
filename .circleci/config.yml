@@ -1,6 +1,5 @@
 version: 2.1
 
-# Use a package of configuration called an orb.
 orbs:
   # Choose either one of the orbs below
   # welcome: circleci/welcome-orb@0.4.1
@@ -22,10 +21,27 @@ jobs:
               --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
               --region us-east-1
 
+  configure_infrastructure: 
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+            fingerprints: ["7f:f2:ba:26:5c:cc:dd:ec:6d:69:9b:fd:09:8a:96:fc"] 
+      - run:
+        name: Install Ansible dependcy
+        command: |
+            apk add --update ansible
+      - run:
+        name: Run Playbook and Configure server
+        command: |
+            ansible-playbook -i [inventory-file] [playbook-file]
+  
                 
 # Sequential workflow
 workflows:
   myWorkflow:
     jobs:
-      - create_infrastructure
+      #- create_infrastructure
+      - configure_infrastructure
       
