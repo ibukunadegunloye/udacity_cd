@@ -29,12 +29,12 @@ jobs:
       - add_ssh_keys:
             fingerprints: ["7f:f2:ba:26:5c:cc:dd:ec:6d:69:9b:fd:09:8a:96:fc"] 
       - run:
-        name: Install Ansible dependcy
-        command: |
+          name: Install Ansible dependcy
+          command: |
             apk add --update ansible
       - run:
-        name: Run Playbook and Configure server
-        command: |
+          name: Run Playbook and Configure server
+          command: |
             ansible-playbook -i [inventory-file] [playbook-file]
   
                 
